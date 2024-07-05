@@ -1,0 +1,11 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 0;
+}
+
+.header__user-select {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
