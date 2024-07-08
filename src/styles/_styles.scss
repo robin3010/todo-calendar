@@ -1,0 +1,58 @@
+$medium: 768px;
+$large: 992px;
+
+@mixin transition-style($prop: all, $delay: 0.3s) {
+  transition: $prop $delay cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+@mixin respond-to($media) {
+  @if $media == small {
+    @media only screen and (max-width: ($medium - 1)) {
+      @content;
+    }
+  } @else if $media == medium {
+    @media only screen and (min-width: $medium) and (max-width: ($large - 1)) {
+      @content;
+    }
+  } @else if $media == large {
+    @media only screen and (min-width: $large) {
+      @content;
+    }
+  }
+}
+
+%font-style {
+  @include respond-to(small) {
+    font-size: 14px;
+  }
+  font-family: Roboto, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #4f4d4a;
+}
+
+%btn {
+  @include transition-style(background-color, 0.2s);
+  box-sizing: border-box;
+  border: none;
+  border-radius: 4px;
+  background-color: transparent;
+  padding: 4px 8px;
+  &:hover {
+    background-color: rgba(79, 77, 74, 0.1);
+  }
+  &:active {
+    background-color: rgba(79, 77, 74, 0.3);
+  }
+  &:disabled {
+    background-color: transparent;
+    opacity: 0.5;
+  }
+}
+
+%container {
+  @include respond-to(large) {
+    padding: 8px 24px;
+  }
+  padding: 8px 16px;
+}

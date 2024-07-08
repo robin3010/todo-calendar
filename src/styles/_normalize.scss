@@ -1,12 +1,8 @@
+@use './styles' as *;
+
 :root {
-  font-family: Roboto, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
-
-  // color: rgba(255, 255, 255, 0.87);
-  // background-color: #242424;
-
+  @extend %font-style;
+  background-color: #eee;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -14,13 +10,36 @@
   -webkit-text-size-adjust: 100%;
 }
 
+body {
+  padding: 0;
+  margin: 0;
+}
+
+select,
+button {
+  @extend %font-style;
+}
+
 .main-container {
+  @include respond-to(small) {
+    border-radius: 0;
+  }
+  @include respond-to(medium) {
+    max-width: 720px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+  @include respond-to(large) {
+    max-width: 960px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
   box-sizing: border-box;
-  width: 876px;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 0 16px;
+  border-radius: 4px;
+  background-color: #fff;
 }

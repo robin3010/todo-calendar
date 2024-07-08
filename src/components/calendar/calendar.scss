@@ -1,0 +1,103 @@
+@use '/src/styles/styles' as *;
+
+.calendar {
+  @extend %container;
+  @include respond-to(small) {
+    padding: 0;
+  }
+}
+
+.calendar-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid rgba(79, 77, 74, 0.3);
+}
+
+.calendar-nav-container {
+  display: flex;
+}
+
+.calendar-nav-select {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-weight: 500;
+  font-size: 1.1em;
+}
+
+.month-select {
+  @include respond-to(small) {
+    width: 130px;
+  }
+  width: 160px;
+}
+
+.calendar-nav-btn,
+.calendar-nav-select {
+  @extend %btn;
+  @extend %container;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+%calendar-grid {
+  @include respond-to(small) {
+    gap: 8px;
+    padding: 8px;
+  }
+  display: grid;
+  justify-items: center;
+  gap: 16px 32px;
+}
+
+.calendar-days-grid,
+.calendar-weekdays-grid {
+  @extend %calendar-grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar-months-grid,
+.calendar-years-grid {
+  @extend %calendar-grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+%calendar-grid-tile {
+  @include respond-to(small) {
+    padding: 10px 0px;
+  }
+  box-sizing: border-box;
+  width: 100%;
+  padding: 16px 0px;
+  border: none;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar-days-grid__day,
+.calendar-months-grid__month,
+.calendar-years-grid__year {
+  @extend %calendar-grid-tile;
+  @extend %btn;
+}
+
+.calendar-weekdays-grid__weekday {
+  @extend %calendar-grid-tile;
+  color: rgba(79, 77, 74, 0.7);
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.active-grid-tile {
+  border-radius: 4px;
+  background-color: #4f4d4a !important;
+  color: #fff;
+}
+
+.trailing-grid-day {
+  color: rgba(79, 77, 74, 0.5);
+}
