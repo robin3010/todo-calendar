@@ -1,5 +1,14 @@
 $medium: 768px;
 $large: 992px;
+$scroll: 6px !default;
+
+@function scrollOffset($scrollable) {
+  @if $scrollable == scroll {
+    @return $scroll;
+  } @else if $scrollable == fixed {
+    @return 0;
+  }
+}
 
 @mixin transition-style($prop: all, $delay: 0.3s) {
   transition: $prop $delay cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -27,12 +36,13 @@ $large: 992px;
   }
   font-family: Roboto, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
+  line-height: calc(2px + 2ex + 2px);
   font-weight: 400;
   color: #4f4d4a;
 }
 
 %btn {
-  @include transition-style(background-color, 0.2s);
+  @include transition-style();
   box-sizing: border-box;
   border: none;
   border-radius: 4px;
@@ -50,9 +60,99 @@ $large: 992px;
   }
 }
 
-%container {
-  @include respond-to(large) {
-    padding: 8px 24px;
+%root-container {
+  @include respond-to(small) {
+    border-radius: 0;
   }
-  padding: 8px 16px;
+  @include respond-to(medium) {
+    max-width: 720px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+  @include respond-to(large) {
+    max-width: 960px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
+  box-sizing: border-box;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+@mixin container($scrollable: fixed) {
+  @include respond-to(large) {
+    padding-left: 24px;
+    padding-right: 24px - scrollOffset($scrollable);
+  }
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+%todo-input {
+  @include transition-style(all, 0.2s);
+  box-sizing: border-box;
+  border: 1px solid rgba(235, 232, 232, 0.2);
+  border-radius: 4px;
+  padding: 4px 8px;
+  background-color: rgba(235, 232, 232, 0.2);
+  &:not(:read-only) {
+    &:hover {
+      background-color: rgba(79, 77, 74, 0.1);
+      border: 1px solid rgba(79, 77, 74, 0.1);
+    }
+    &:active {
+      background-color: rgba(79, 77, 74, 0.2);
+      border: 1px solid rgba(79, 77, 74, 0.3);
+    }
+  }
+}
+
+%checkbox {
+  border-radius: 4px;
+  float: left;
+  width: 1em;
+  height: 1em;
+  appearance: none;
+  background-color: #fff;
+  border: 1px solid rgba(79, 77, 74, 0.5);
+  &:checked {
+    background-color: rgba(79, 77, 74, 0.8);
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDYuNS4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjQgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZmlsbD0iI2ZmZmZmZiIgZD0iTTQzOC42IDEwNS40YzEyLjUgMTIuNSAxMi41IDMyLjggMCA0NS4zbC0yNTYgMjU2Yy0xMi41IDEyLjUtMzIuOCAxMi41LTQ1LjMgMGwtMTI4LTEyOGMtMTIuNS0xMi41LTEyLjUtMzIuOCAwLTQ1LjNzMzIuOC0xMi41IDQ1LjMgMEwxNjAgMzM4LjcgMzkzLjQgMTA1LjRjMTIuNS0xMi41IDMyLjgtMTIuNSA0NS4zIDB6Ii8+PC9zdmc+);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 85% 85%;
+  }
+}
+
+@mixin todo-item-btn($btn-icon, $hover-color, $active-color) {
+  @extend %btn;
+  height: calc(4px + 2ex + 2px);
+  width: calc(8px + 1ex + 2px);
+  box-sizing: content-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  & button {
+    width: 100%;
+    height: 100%;
+    box-sizing: content-box;
+    mask-image: url($btn-icon);
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: 78% 78%;
+    background-color: rgba(79, 77, 74, 0.5);
+  }
+  &:hover button {
+    background-color: $hover-color;
+  }
+  &:active button {
+    background-color: $active-color;
+  }
 }

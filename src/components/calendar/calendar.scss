@@ -1,7 +1,7 @@
 @use '/src/styles/styles' as *;
 
 .calendar {
-  @extend %container;
+  @include container();
   @include respond-to(small) {
     padding: 0;
   }
@@ -37,7 +37,7 @@
 .calendar-nav-btn,
 .calendar-nav-select {
   @extend %btn;
-  @extend %container;
+  @include container();
   padding-top: 12px;
   padding-bottom: 12px;
 }
