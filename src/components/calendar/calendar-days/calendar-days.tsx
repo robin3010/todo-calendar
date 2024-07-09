@@ -2,11 +2,11 @@ import { getDateElementNames } from 'components/calendar/lib/utils'
 import Todos from 'components/todos/todos'
 import useCalendar from 'contexts/calendar/useCalendar'
 import { TodosContextProvider } from 'contexts/todos/todosContext'
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import ModalContainer from 'shared/ui/modalContainer'
 
-const CalendarDays: React.FC = () => {
-  const { activeDate, days } = useCalendar()
+const CalendarDays: FC = () => {
+  const { activeDate, setActiveDate, days } = useCalendar()
 
   const weekdays = getDateElementNames({ weekday: 'short' }, 'day', 7)
 
@@ -19,8 +19,9 @@ const CalendarDays: React.FC = () => {
     return `${isActive ? ' active-grid-tile' : ''}${!isDayOfCurrentMonth ? ' trailing-grid-day' : ''}`
   }
 
-  const closeTodosHandler = () => {
-    setIsTodosOpen(false)
+  const openTodosHandler = (day: Date) => {
+    setActiveDate(day)
+    setIsTodosOpen(true)
   }
 
   return (
@@ -38,13 +39,16 @@ const CalendarDays: React.FC = () => {
             type="button"
             className={`calendar-days-grid__day btn${getDayClasses(day)}`}
             key={day.getTime()}
-            onClick={() => setIsTodosOpen(true)}
+            onClick={() => openTodosHandler(day)}
           >
             {day.getDate()}
           </button>
         ))}
       </div>
-      <ModalContainer isOpen={isTodosOpen} closeHandler={closeTodosHandler}>
+      <ModalContainer
+        isOpen={isTodosOpen}
+        closeHandler={() => setIsTodosOpen(false)}
+      >
         <TodosContextProvider>
           <Todos />
         </TodosContextProvider>

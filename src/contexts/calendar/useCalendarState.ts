@@ -40,6 +40,7 @@ const useCalendarState = () => {
 
   return {
     activeDate,
+    setActiveDate,
     dateChangeHandler,
     days,
     months,

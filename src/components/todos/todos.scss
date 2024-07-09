@@ -7,4 +7,6 @@
 
 .todos-heading {
   @include container();
+  display: flex;
+  gap: 12px;
 }
