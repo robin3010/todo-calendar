@@ -1,8 +1,8 @@
 import { useTodosMethods } from 'contexts/todos/useTodos'
-import { memo, useState } from 'react'
+import { ChangeEvent, FC, FormEvent, memo, useState } from 'react'
 import './todoForm.scss'
 
-const TodoForm = memo(() => {
+const TodoForm: FC = memo(() => {
   console.log('Render Form')
 
   const { addNewTodo } = useTodosMethods()
@@ -10,11 +10,11 @@ const TodoForm = memo(() => {
   const [title, setTitle] = useState('')
   const placeholder = 'Новая задача'
 
-  const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value)
   }
 
-  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (title.length) {

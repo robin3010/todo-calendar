@@ -1,7 +1,8 @@
 import useCalendar from 'contexts/calendar/useCalendar'
+import { FC } from 'react'
 import { CalendarGridProps } from 'shared/types/types'
 
-const CalendarMonths: React.FC<CalendarGridProps> = ({ show }) => {
+const CalendarMonths: FC<CalendarGridProps> = ({ show }) => {
   const { activeDate, dateChangeHandler, months } = useCalendar()
 
   const getMonthClasses = (month: number) => {

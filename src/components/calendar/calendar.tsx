@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import useCalendar from 'contexts/calendar/useCalendar'
 import CalendarDays from 'components/calendar/calendar-days/calendar-days'
 import './calendar.scss'
 import CalendarMonths from 'components/calendar/calendar-months/calendar-months'
 import CalendarYears from 'components/calendar/calendar-years/calendar-years'
 
-const Calendar = () => {
+const Calendar: FC = () => {
   const {
     activeDate,
     dateChangeHandler,

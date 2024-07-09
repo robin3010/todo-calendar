@@ -1,11 +1,12 @@
 import useCalendar from 'contexts/calendar/useCalendar'
+import { FC } from 'react'
 import { CalendarGridProps } from 'shared/types/types'
 
 interface CalendarYearsProps extends CalendarGridProps {
   showMonths?: (param: boolean) => void
 }
 
-const CalendarYears: React.FC<CalendarYearsProps> = ({ show, showMonths }) => {
+const CalendarYears: FC<CalendarYearsProps> = ({ show, showMonths }) => {
   const { activeDate, dateChangeHandler, years } = useCalendar()
 
   const getYearClasses = (year: number) => {

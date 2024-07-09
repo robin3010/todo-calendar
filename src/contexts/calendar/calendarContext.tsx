@@ -1,11 +1,11 @@
-import { PropsWithChildren, createContext } from 'react'
+import { FC, PropsWithChildren, createContext } from 'react'
 import useCalendarState from './useCalendarState'
 
 export const CalendarContext = createContext(
   {} as ReturnType<typeof useCalendarState>,
 )
 
-export const CalendarContextProvider: React.FC<PropsWithChildren> = ({
+export const CalendarContextProvider: FC<PropsWithChildren> = ({
   children,
 }) => {
   return (

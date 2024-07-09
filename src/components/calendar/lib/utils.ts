@@ -22,7 +22,7 @@ export const getDateElementNames = (
   option: Intl.DateTimeFormatOptions,
   iterateElem: 'month' | 'day',
   length: number,
-  localeName: string | undefined = undefined,
+  localeName?: string,
 ) => {
   const { format } = new Intl.DateTimeFormat(localeName, option)
 

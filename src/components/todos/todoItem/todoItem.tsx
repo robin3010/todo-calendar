@@ -1,10 +1,10 @@
 import { useTodosMethods } from 'contexts/todos/useTodos'
 import './todoItem.scss'
-import { memo, useCallback, useEffect, useState } from 'react'
+import { FC, memo, useCallback, useEffect, useState } from 'react'
 import { Todo } from 'shared/types/types'
 import clsx from 'clsx'
 
-const TodoItem: React.FC<Todo> = memo(({ id, title, done }) => {
+const TodoItem: FC<Todo> = memo(({ id, title, done }) => {
   const { editTodo, deleteTodo } = useTodosMethods()
   const [titleInput, setTitleInput] = useState(title)
 
