@@ -1,7 +1,22 @@
+@use '/src/styles/styles' as *;
+
 .header {
+  @include container();
+  @include respond-to(small) {
+    border-radius: 0;
+  }
   display: flex;
   justify-content: space-between;
-  padding: 16px 0;
+  align-items: center;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  border-radius: 4px 4px 0 0;
+  background-image: linear-gradient(50deg, rgba(255, 161, 0, 0.4), #ffa100);
+}
+
+.header__app-title {
+  font-size: 1.2em;
+  font-weight: 600;
 }
 
 .header__user-select {
