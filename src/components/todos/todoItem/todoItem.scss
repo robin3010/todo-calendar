@@ -3,12 +3,22 @@
 .todo-item {
   display: flex;
   align-items: center;
-  // gap: 8px;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  &:hover {
+    border-top: 1px solid rgba(79, 77, 74, 0.3);
+    border-bottom: 1px solid rgba(79, 77, 74, 0.3);
+  }
+  &:focus {
+    border-top: 1px solid rgba(79, 77, 74, 0.6);
+    border-bottom: 1px solid rgba(79, 77, 74, 0.6);
+  }
 }
 
 .todo-item__status-cbx {
   @extend %checkbox;
   margin-right: 8px;
+  margin-left: 8px;
 }
 
 .todo-item__title {
@@ -30,4 +40,13 @@
     rgba(236, 65, 79, 0.8),
     rgb(236, 65, 79)
   );
+}
+
+.done {
+  @include transition-style();
+  text-decoration: line-through;
+  opacity: 0.7;
+  &:hover {
+    opacity: 1;
+  }
 }

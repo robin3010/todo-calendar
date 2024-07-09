@@ -8,6 +8,7 @@ const TodoForm = memo(() => {
   const { addNewTodo } = useTodosMethods()
 
   const [title, setTitle] = useState('')
+  const placeholder = 'Новая задача'
 
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value)
@@ -25,16 +26,17 @@ const TodoForm = memo(() => {
   return (
     <form onSubmit={submitHandler} className="todo-form">
       <div className="todo-form-container">
+        <div className="todo-form__add-btn">
+          <button type="submit">{}</button>
+        </div>
         <input
           type="text"
           className="todo-form__input"
           value={title}
           onChange={inputHandler}
-          placeholder="new todo"
+          placeholder={placeholder}
+          size={placeholder.length}
         />
-        <div className="todo-form__add-btn">
-          <button type="submit">{}</button>
-        </div>
       </div>
     </form>
   )

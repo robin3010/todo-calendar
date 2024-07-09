@@ -1,14 +1,9 @@
 import { useCallback, useEffect, useState } from 'react'
+import { Todo } from 'shared/types/types'
 
 const LS_TODO_LIST = 'LS_TODO_LIST'
 
-export interface Todo {
-  id: string
-  done: boolean
-  title: string
-}
-
-export const useTodosState = () => {
+const useTodosState = () => {
   const [todos, setTodos] = useState<Todo[]>(() => {
     const getStoredTodos = localStorage.getItem(LS_TODO_LIST)
     const fillTodoList = getStoredTodos ? JSON.parse(getStoredTodos) : []
@@ -40,18 +35,24 @@ export const useTodosState = () => {
     [setTodos],
   )
 
-  const changeTodoStatus = useCallback(
-    (id: string) => {
-      setTodos((prev) =>
-        prev.map((todo) => {
-          return todo.id !== id
+  const editTodo = useCallback(
+    (editedTodo: Partial<Todo>) => {
+      setTodos((prev) => {
+        const todosArr = prev.map((todo) => {
+          return todo.id !== editedTodo.id
             ? todo
             : {
                 ...todo,
-                done: !todo.done,
+                ...editedTodo,
               }
-        }),
-      )
+        })
+        const sortedDone = [
+          ...todosArr.filter((todo) => !todo.done),
+          ...todosArr.filter((todo) => todo.done),
+        ]
+
+        return sortedDone
+      })
     },
     [setTodos],
   )
@@ -64,7 +65,9 @@ export const useTodosState = () => {
     todos,
     addNewTodo,
     deleteTodo,
-    changeTodoStatus,
+    editTodo,
     clearTodosList,
   }
 }
+
+export default useTodosState

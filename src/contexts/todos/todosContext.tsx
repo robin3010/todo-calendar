@@ -1,5 +1,6 @@
 import { useMemo, createContext, PropsWithChildren } from 'react'
-import { Todo, useTodosState } from './useTodosState'
+import { Todo } from 'shared/types/types'
+import useTodosState from './useTodosState'
 
 export const TodosContext = createContext<Todo[]>([])
 export const TodosMethodsContext = createContext(

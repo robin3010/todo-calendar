@@ -1,33 +1,39 @@
 import { useTodosMethods } from 'contexts/todos/useTodos'
-import { Todo } from 'contexts/todos/useTodosState'
 import './todoItem.scss'
-import { memo } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
+import { Todo } from 'shared/types/types'
+import clsx from 'clsx'
 
 const TodoItem: React.FC<Todo> = memo(({ id, title, done }) => {
-  const { changeTodoStatus, deleteTodo } = useTodosMethods()
+  const { editTodo, deleteTodo } = useTodosMethods()
+  const [titleInput, setTitleInput] = useState(title)
 
-  // const changeStatusHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const editTodoHandler = useCallback(
+    (editedKey: Partial<Todo>) => {
+      const editedTodo = { id, title, done, ...editedKey }
+      editTodo(editedTodo)
+    },
+    [done, editTodo, id, title],
+  )
 
-  //   changeTodoStatus(id)
-  // }
+  useEffect(() => {
+    if (title !== titleInput) editTodoHandler({ title: titleInput })
+  }, [editTodoHandler, title, titleInput])
 
   return (
-    <li className="todo-item">
+    <li className={clsx('todo-item', done && 'done')}>
       <input
         className="todo-item__status-cbx"
         type="checkbox"
         checked={done}
-        onChange={() => changeTodoStatus(id)}
+        onChange={() => editTodoHandler({ done: !done })}
       />
-      <input className="todo-item__title" type="text" value={title} readOnly />
-      <div className="todo-item__edit-btn">
-        <button
-          type="button"
-          // onClick={() => deleteTodo(id)}
-        >
-          {}
-        </button>
-      </div>
+      <input
+        className="todo-item__title"
+        type="text"
+        value={titleInput}
+        onChange={(e) => setTitleInput(e.target.value)}
+      />
       <div className="todo-item__delete-btn">
         <button type="button" onClick={() => deleteTodo(id)}>
           {}
