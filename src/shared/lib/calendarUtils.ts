@@ -1,7 +1,7 @@
-export const isLeapYearFunc = (year: number) =>
+const isLeapYearFunc = (year: number) =>
   (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0
 
-export const daysInMonth = (date: Date) => {
+const daysInMonth = (date: Date) => {
   const month = date.getMonth() + 1
   const year = date.getFullYear()
 
@@ -16,6 +16,15 @@ export const daysInMonth = (date: Date) => {
     default:
       return 31
   }
+}
+
+export const dayOfYear = (date: Date) => {
+  const length = date.getMonth()
+
+  const daysInMonths = Array.from({ length }, (_, k) => {
+    return daysInMonth(new Date(new Date(date.getFullYear(), k, 1)))
+  })
+  return daysInMonths.reduce((acc, val) => acc + val, 0) + date.getDate() - 1
 }
 
 export const getDateElementNames = (

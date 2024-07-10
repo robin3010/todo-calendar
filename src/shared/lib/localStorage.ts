@@ -1,8 +1,9 @@
 import { Todo, TodosByDate } from 'shared/types/types'
+import { dateStringFormat } from './utils'
 
 export const CALENTODO_CACHE = 'CALENTODO_CACHE'
 
-const dateKeyFormat = (date: Date) => date.toLocaleString('sv').split(' ')[0]
+const dateKeyFormat = (date: Date) => dateStringFormat(date).split(' ')[0]
 
 export const getLocalData = (): TodosByDate => {
   const data = localStorage.getItem(CALENTODO_CACHE)

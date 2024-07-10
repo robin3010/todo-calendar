@@ -1,22 +1,38 @@
-import { getDateElementNames } from 'components/calendar/lib/utils'
+import clsx from 'clsx'
 import Todos from 'components/todos/todos'
 import useCalendar from 'contexts/calendar/useCalendar'
 import { TodosContextProvider } from 'contexts/todos/todosContext'
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import ModalContainer from 'shared/ui/modalContainer'
+import { getCachedTodos } from 'shared/lib/localStorage'
+import { dayOfYear, getDateElementNames } from 'shared/lib/calendarUtils'
 
 const CalendarDays: FC = () => {
-  const { activeDate, setActiveDate, days } = useCalendar()
+  const {
+    activeDate,
+    setActiveDate,
+    days,
+    weekends,
+    isTodosOpen,
+    setIsTodosOpen,
+  } = useCalendar()
 
   const weekdays = getDateElementNames({ weekday: 'short' }, 'day', 7)
 
-  const [isTodosOpen, setIsTodosOpen] = useState(false)
+  console.log({ days }, { weekends })
 
   const getDayClasses = (day: Date) => {
-    const isActive = day.toDateString() === activeDate.toDateString()
+    const isToday = day.toDateString() === new Date().toDateString()
     const isDayOfCurrentMonth = day.getMonth() === activeDate.getMonth()
+    const isTodos = !!getCachedTodos(day).length
+    const isWeekend = weekends && weekends.values[dayOfYear(day)]
 
-    return `${isActive ? ' active-grid-tile' : ''}${!isDayOfCurrentMonth ? ' trailing-grid-day' : ''}`
+    return {
+      'today-grid-tile': isToday,
+      'trailing-grid-day': !isDayOfCurrentMonth,
+      'have-todos': isTodos,
+      weekend: !!isWeekend,
+    }
   }
 
   const openTodosHandler = (day: Date) => {
@@ -37,7 +53,7 @@ const CalendarDays: FC = () => {
         {days.map((day) => (
           <button
             type="button"
-            className={`calendar-days-grid__day btn${getDayClasses(day)}`}
+            className={clsx('calendar-days-grid__day btn', getDayClasses(day))}
             key={day.getTime()}
             onClick={() => openTodosHandler(day)}
           >

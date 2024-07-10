@@ -1,7 +1,7 @@
 import useCalendar from 'contexts/calendar/useCalendar'
 import { useCallback, useEffect, useState } from 'react'
 import { Todo } from 'shared/types/types'
-import { getCachedTodos, saveDataLocal } from './lib/localStorage'
+import { getCachedTodos, saveDataLocal } from '../../shared/lib/localStorage'
 
 const useTodosState = () => {
   const { activeDate } = useCalendar()

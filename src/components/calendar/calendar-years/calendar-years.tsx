@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import useCalendar from 'contexts/calendar/useCalendar'
 import { FC } from 'react'
 import { CalendarGridProps } from 'shared/types/types'
@@ -7,13 +8,7 @@ interface CalendarYearsProps extends CalendarGridProps {
 }
 
 const CalendarYears: FC<CalendarYearsProps> = ({ show, showMonths }) => {
-  const { activeDate, dateChangeHandler, years } = useCalendar()
-
-  const getYearClasses = (year: number) => {
-    const isActive = year === activeDate.getFullYear()
-
-    return isActive ? ' active-grid-tile' : ''
-  }
+  const { dateChangeHandler, years } = useCalendar()
 
   const yearClickHandler = (year: number) => {
     dateChangeHandler(year)
@@ -27,7 +22,9 @@ const CalendarYears: FC<CalendarYearsProps> = ({ show, showMonths }) => {
         {years.map((year) => (
           <button
             type="button"
-            className={`calendar-years-grid__year${getYearClasses(+year)}`}
+            className={clsx('calendar-years-grid__year', {
+              'today-grid-tile': year === new Date().getFullYear(),
+            })}
             key={year}
             onClick={() => yearClickHandler(+year)}
           >

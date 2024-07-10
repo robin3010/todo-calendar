@@ -71,7 +71,7 @@
   box-sizing: border-box;
   width: 100%;
   padding: 16px 0px;
-  border: none;
+  border: 2px solid transparent;
   background-color: #fff;
   display: flex;
   justify-content: center;
@@ -81,8 +81,10 @@
 .calendar-days-grid__day,
 .calendar-months-grid__month,
 .calendar-years-grid__year {
-  @extend %calendar-grid-tile;
-  @extend %btn;
+  &:not(.today-grid-tile) {
+    @extend %calendar-grid-tile;
+    @extend %btn;
+  }
 }
 
 .calendar-weekdays-grid__weekday {
@@ -92,12 +94,42 @@
   text-transform: uppercase;
 }
 
-.active-grid-tile {
+.today-grid-tile {
+  @extend %calendar-grid-tile;
+  font-weight: 500;
   border-radius: 4px;
-  background-color: #4f4d4a !important;
-  color: #fff;
+  border: 2px solid rgba(79, 77, 74, 0.5);
+  color: rgba(79, 77, 74, 0.8);
+  background-color: rgba(255, 162, 0, 0.1);
+  &:hover {
+    @include transition-style(all, 0.3s);
+    background-color: rgba(255, 162, 0, 0.2);
+    color: #4f4d4a;
+  }
+  &:active {
+    @include transition-style(all, 0.1s);
+    background-color: rgba(255, 162, 0, 0.3);
+    color: #4f4d4a;
+  }
+}
+
+.have-todos {
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    top: 70%;
+    border-radius: 50%;
+    background-color: #f09800;
+  }
 }
 
 .trailing-grid-day {
-  color: rgba(79, 77, 74, 0.5);
+  color: rgba(79, 77, 74, 0.55);
+}
+
+.weekend {
+  color: rgb(236, 65, 79);
 }

@@ -1,14 +1,18 @@
+import clsx from 'clsx'
 import useCalendar from 'contexts/calendar/useCalendar'
 import { FC } from 'react'
+import { dateYYYYMM } from 'shared/lib/utils'
 import { CalendarGridProps } from 'shared/types/types'
 
 const CalendarMonths: FC<CalendarGridProps> = ({ show }) => {
   const { activeDate, dateChangeHandler, months } = useCalendar()
 
   const getMonthClasses = (month: number) => {
-    const isActive = month === activeDate.getMonth()
+    const today = new Date()
 
-    return isActive ? ' active-grid-tile' : ''
+    return (
+      dateYYYYMM(today) === dateYYYYMM(activeDate) && month === today.getMonth()
+    )
   }
 
   const monthClickHandler = (month: number) => {
@@ -22,7 +26,9 @@ const CalendarMonths: FC<CalendarGridProps> = ({ show }) => {
         {months.map((month, index) => (
           <button
             type="button"
-            className={`calendar-months-grid__month${getMonthClasses(index)}`}
+            className={clsx('calendar-months-grid__month', {
+              'today-grid-tile': getMonthClasses(index),
+            })}
             key={month}
             onClick={() => monthClickHandler(index)}
           >
