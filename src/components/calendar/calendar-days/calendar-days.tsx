@@ -19,8 +19,6 @@ const CalendarDays: FC = () => {
 
   const weekdays = getDateElementNames({ weekday: 'short' }, 'day', 7)
 
-  console.log({ days }, { weekends })
-
   const getDayClasses = (day: Date) => {
     const isToday = day.toDateString() === new Date().toDateString()
     const isDayOfCurrentMonth = day.getMonth() === activeDate.getMonth()

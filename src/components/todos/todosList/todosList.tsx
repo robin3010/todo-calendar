@@ -5,8 +5,6 @@ import TodoForm from '../todoForm/todoForm'
 import './todosList.scss'
 
 const TodosList: FC = () => {
-  console.log('Render TodoList')
-
   const todos = useTodos()
 
   return (

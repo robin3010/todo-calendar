@@ -42,17 +42,21 @@ $scroll: 6px !default;
 }
 
 %btn {
-  @include transition-style();
   box-sizing: border-box;
   border: none;
   border-radius: 4px;
   background-color: transparent;
   padding: 4px 8px;
+  opacity: 0.9;
   &:hover {
+    @include transition-style();
     background-color: rgba(79, 77, 74, 0.1);
+    opacity: 1;
   }
   &:active {
+    @include transition-style(all, 0.1s);
     background-color: rgba(79, 77, 74, 0.3);
+    opacity: 1;
   }
   &:disabled {
     background-color: transparent;

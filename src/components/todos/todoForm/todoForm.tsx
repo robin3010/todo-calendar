@@ -3,8 +3,6 @@ import { ChangeEvent, FC, FormEvent, memo, useState } from 'react'
 import './todoForm.scss'
 
 const TodoForm: FC = memo(() => {
-  console.log('Render Form')
-
   const { addNewTodo } = useTodosMethods()
 
   const [title, setTitle] = useState('')
@@ -35,7 +33,6 @@ const TodoForm: FC = memo(() => {
           value={title}
           onChange={inputHandler}
           placeholder={placeholder}
-          size={placeholder.length}
         />
       </div>
     </form>
