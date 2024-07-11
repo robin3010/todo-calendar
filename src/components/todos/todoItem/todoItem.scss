@@ -22,7 +22,7 @@
 }
 
 .todo-item__title {
-  @extend %todo-input;
+  @extend %text-input;
   flex-grow: 1;
 }
 

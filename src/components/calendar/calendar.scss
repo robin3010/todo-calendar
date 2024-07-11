@@ -35,11 +35,24 @@
 }
 
 .calendar-nav-btn,
-.calendar-nav-select {
+.calendar-nav-select,
+.calendar-today-btn {
   @extend %btn;
   @include container();
   padding-top: 12px;
   padding-bottom: 12px;
+}
+
+.calendar-today-btn_hidden {
+  opacity: 0;
+  &:hover,
+  :active {
+    opacity: 0;
+  }
+}
+
+.calendar-today-btn {
+  @include transition-style(opacity, 0.3s);
 }
 
 %calendar-grid {

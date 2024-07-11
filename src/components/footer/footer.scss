@@ -50,7 +50,6 @@
 
 @mixin link-icon($icon-path) {
   @extend %btn;
-  @include transition-style();
   height: calc((4px + 2ex) * 1.5);
   width: calc((8px + 1ex) * 1.5);
   display: flex;

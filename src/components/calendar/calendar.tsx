@@ -29,9 +29,6 @@ const Calendar: FC = () => {
 
   return (
     <main className="calendar">
-      {/* <div className="calendar-header">
-        {activeDate.toLocaleDateString(undefined, { dateStyle: 'long' })}
-      </div> */}
       <div className="calendar-nav">
         <div className="calendar-nav-container">
           <button
