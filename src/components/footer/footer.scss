@@ -1,0 +1,74 @@
+@use '/src/styles/styles' as *;
+@use 'sass:map';
+@import './styles/links';
+
+.footer {
+  @include container();
+  border-top: 2px solid rgba(79, 77, 74, 0.3);
+  border-radius: 0 0 4px 4px;
+  background-image: linear-gradient(50deg, rgba(79, 77, 74, 0.65), #4f4d4a);
+  color: #fff;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.footer__copyright {
+  display: flex;
+  gap: 4px;
+}
+
+.footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-link {
+  @include transition-style(all, 0.2s);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+  &:hover {
+    color: rgba(255, 162, 0, 0.9);
+    & > :not(.footer-link__link-title) {
+      background-color: rgba(255, 162, 0, 0.8);
+    }
+  }
+  &:active {
+    @include transition-style(all, 0.1s);
+    color: #ffa100;
+    & > :not(.footer-link__link-title) {
+      background-color: #ffa100;
+    }
+  }
+}
+
+@mixin link-icon($icon-path) {
+  @extend %btn;
+  @include transition-style();
+  height: calc((4px + 2ex) * 1.5);
+  width: calc((8px + 1ex) * 1.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  mask-image: url($icon-path);
+  mask-position: center;
+  mask-repeat: no-repeat;
+}
+
+@mixin footer-link-icon($name) {
+  .footer-link__link-#{$name} {
+    @include link-icon(map.get($links, #{$name}));
+  }
+}
+
+@include footer-link-icon('github');
+@include footer-link-icon('telegram');
+@include footer-link-icon('linkedin');
+@include footer-link-icon('email');
