@@ -125,7 +125,7 @@ $scroll: 6px !default;
   }
 }
 
-@mixin todo-item-btn($btn-icon, $hover-color, $active-color, $size: 78%) {
+@mixin btn-icon($icon-path, $hover-color, $active-color, $size: 78%) {
   @extend %btn;
   height: calc(4px + 2ex);
   width: calc(8px + 1ex);
@@ -139,7 +139,7 @@ $scroll: 6px !default;
     width: 100%;
     height: 100%;
     box-sizing: content-box;
-    mask-image: url($btn-icon);
+    mask-image: url($icon-path);
     mask-position: center;
     mask-repeat: no-repeat;
     mask-size: $size auto;
