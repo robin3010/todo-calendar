@@ -16,3 +16,7 @@ export interface Todo {
 export type TodosByDate = {
   [k: string]: Todo[]
 }
+
+export type LocalData = {
+  [k: string]: TodosByDate
+}

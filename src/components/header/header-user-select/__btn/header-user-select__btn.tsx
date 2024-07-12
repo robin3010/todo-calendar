@@ -1,14 +1,14 @@
 import clsx from 'clsx'
 import { FC } from 'react'
 
-interface UserSelectBtnProps {
+interface HeaderUserSelectBtnProps {
   isReadonly: boolean
   setIsReadonly: (param: boolean) => void
   userInput: string
   inputRef?: React.MutableRefObject<HTMLInputElement | null>
 }
 
-const UserSelectBtn: FC<UserSelectBtnProps> = ({
+const HeaderUserSelectBtn: FC<HeaderUserSelectBtnProps> = ({
   isReadonly,
   setIsReadonly,
   userInput,
@@ -26,6 +26,7 @@ const UserSelectBtn: FC<UserSelectBtnProps> = ({
     <div
       className={clsx('header-user-select__btn', {
         'header-user-select__btn_edit': isReadonly,
+        'header-user-select__btn_save': !isReadonly,
         disabled: !isReadonly && !userInput,
       })}
     >
@@ -40,4 +41,4 @@ const UserSelectBtn: FC<UserSelectBtnProps> = ({
   )
 }
 
-export default UserSelectBtn
+export default HeaderUserSelectBtn

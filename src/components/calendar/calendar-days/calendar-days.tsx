@@ -6,6 +6,7 @@ import { FC } from 'react'
 import ModalContainer from 'shared/ui/modalContainer'
 import { getCachedTodos } from 'shared/lib/localStorage'
 import { dayOfYear, getDateElementNames } from 'shared/lib/calendarUtils'
+import useUser from 'contexts/user/useUser'
 
 const CalendarDays: FC = () => {
   const {
@@ -17,12 +18,13 @@ const CalendarDays: FC = () => {
     setIsTodosOpen,
   } = useCalendar()
 
+  const { user } = useUser()
   const weekdays = getDateElementNames({ weekday: 'short' }, 'day', 7)
 
   const getDayClasses = (day: Date) => {
     const isToday = day.toDateString() === new Date().toDateString()
     const isDayOfCurrentMonth = day.getMonth() === activeDate.getMonth()
-    const isTodos = !!getCachedTodos(day).length
+    const isTodos = !!getCachedTodos(day, user).length
     const isWeekend = weekends && weekends.values[dayOfYear(day)]
 
     return {

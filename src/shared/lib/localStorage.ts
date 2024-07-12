@@ -1,29 +1,40 @@
-import { Todo, TodosByDate } from 'shared/types/types'
+import { LocalData, Todo } from 'shared/types/types'
 import { dateStringFormat } from './utils'
 
 export const CALENTODO_CACHE = 'CALENTODO_CACHE'
+export const CALENTODO_USER = 'CALENTODO_USER'
 
 const dateKeyFormat = (date: Date) => dateStringFormat(date).split(' ')[0]
 
-export const getLocalData = (): TodosByDate => {
+export const getLocalData = (): LocalData => {
   const data = localStorage.getItem(CALENTODO_CACHE)
-
   return data ? JSON.parse(data) : {}
 }
 
-export const getCachedTodos = (date: Date) => {
+export const getCachedTodos = (date: Date, user: string) => {
   const localData = getLocalData()
+
+  const userData = localData[user] ?? {}
 
   const dateFormatted = dateKeyFormat(date)
 
-  return localData[dateFormatted as keyof typeof localData] || []
+  if (Object.keys(userData).length) {
+    return userData[dateFormatted] ?? []
+  }
+  return []
 }
 
-export const saveDataLocal = (todos: Todo[], date: Date) => {
+export const saveDataLocal = (todos: Todo[], date: Date, user: string) => {
   const localData = getLocalData()
+
+  const userData = localData[user] ?? {}
+
   const newLocalData = {
     ...localData,
-    [dateKeyFormat(date)]: todos,
+    [user]: {
+      ...userData,
+      [dateKeyFormat(date)]: todos,
+    },
   }
 
   localStorage.setItem(

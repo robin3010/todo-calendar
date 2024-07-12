@@ -1,16 +1,20 @@
 import useCalendar from 'contexts/calendar/useCalendar'
 import { useCallback, useEffect, useState } from 'react'
 import { Todo } from 'shared/types/types'
+import useUser from 'contexts/user/useUser'
 import { getCachedTodos, saveDataLocal } from '../../shared/lib/localStorage'
 
 const useTodosState = () => {
   const { activeDate } = useCalendar()
+  const { user } = useUser()
 
-  const [todos, setTodos] = useState<Todo[]>(() => getCachedTodos(activeDate))
+  const [todos, setTodos] = useState<Todo[]>(() =>
+    getCachedTodos(activeDate, user),
+  )
 
   useEffect(() => {
-    saveDataLocal(todos, activeDate)
-  }, [activeDate, todos])
+    saveDataLocal(todos, activeDate, user)
+  }, [activeDate, todos, user])
 
   const addNewTodo = useCallback(
     (title: string) => {
@@ -57,8 +61,6 @@ const useTodosState = () => {
   const clearTodosList = useCallback(() => {
     setTodos([])
   }, [setTodos])
-
-  // const todosByDate = (date: Date) => todos.
 
   return {
     todos,
