@@ -5,6 +5,7 @@
   @include respond-to(small) {
     padding: 0;
   }
+  flex-grow: 1;
 }
 
 .calendar-days,

@@ -72,11 +72,13 @@ $scroll: 6px !default;
     max-width: 720px;
     margin-top: 16px;
     margin-bottom: 16px;
+    min-height: calc(100vh - 32px);
   }
   @include respond-to(large) {
     max-width: 960px;
     margin-top: 24px;
     margin-bottom: 24px;
+    min-height: calc(100vh - 48px);
   }
   box-sizing: border-box;
   width: 100%;

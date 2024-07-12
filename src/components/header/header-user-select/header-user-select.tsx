@@ -25,13 +25,15 @@ const HeaderUserSelect: FC = () => {
       setIsReadonly(true)
       return undefined
     }
-    // alert('invalid userName')
+    // eslint-disable-next-line no-alert
+    alert('Допускаются латинские буквы, цифры, одинарные знаки . _ - внутри')
     return undefined
   }
 
   const logoutHandler = () => {
     SelectUser('')
     setUserInput('')
+    setIsReadonly(false)
   }
 
   return (
@@ -58,7 +60,7 @@ const HeaderUserSelect: FC = () => {
       <button
         className="header-user-select__btn header-user-select__btn_logout"
         type="button"
-        onClick={() => logoutHandler}
+        onClick={logoutHandler}
         disabled={!user}
       >
         {}
