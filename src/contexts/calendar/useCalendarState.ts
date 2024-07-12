@@ -1,4 +1,4 @@
-import getWeekendsByYear from 'components/calendar/calendar-days/api/weekendsApi'
+import getWeekendsByYear from 'shared/api/weekendsApi'
 import { getDateElementNames, getMonthDays } from 'shared/lib/calendarUtils'
 import { useCallback, useEffect, useState } from 'react'
 import { dateYYYYMM } from 'shared/lib/utils'
