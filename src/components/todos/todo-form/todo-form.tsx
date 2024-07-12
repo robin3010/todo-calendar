@@ -1,6 +1,6 @@
 import { useTodosMethods } from 'contexts/todos/useTodos'
-import { ChangeEvent, FC, FormEvent, memo, useState } from 'react'
-import './todoForm.scss'
+import { FC, FormEvent, memo, useState } from 'react'
+import './todo-form.scss'
 
 const TodoForm: FC = memo(() => {
   const { addNewTodo } = useTodosMethods()
@@ -8,15 +8,11 @@ const TodoForm: FC = memo(() => {
   const [title, setTitle] = useState('')
   const placeholder = 'Новая задача'
 
-  const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.target.value)
-  }
-
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
-    if (title.length) {
-      addNewTodo(title)
+    const trimmedTitle = title.trim()
+    if (trimmedTitle) {
+      addNewTodo(trimmedTitle)
       setTitle('')
     }
   }
@@ -24,14 +20,15 @@ const TodoForm: FC = memo(() => {
   return (
     <form onSubmit={submitHandler} className="todo-form">
       <div className="todo-form-container">
-        <div className="todo-form__add-btn">
-          <button type="submit">{}</button>
-        </div>
+        <button className="todo-form__add-btn" type="submit">
+          {}
+          <span className="icon" />
+        </button>
         <input
           type="text"
           className="todo-form__input"
           value={title}
-          onChange={inputHandler}
+          onChange={(e) => setTitle(e.target.value.trimStart())}
           placeholder={placeholder}
         />
       </div>

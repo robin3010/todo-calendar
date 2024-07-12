@@ -1,5 +1,5 @@
 import { useTodosMethods } from 'contexts/todos/useTodos'
-import './todoItem.scss'
+import './todo-item.scss'
 import { FC, memo, useCallback, useEffect, useState } from 'react'
 import { Todo } from 'shared/types/types'
 import clsx from 'clsx'
@@ -7,6 +7,7 @@ import clsx from 'clsx'
 const TodoItem: FC<Todo> = memo(({ id, title, done }) => {
   const { editTodo, deleteTodo } = useTodosMethods()
   const [titleInput, setTitleInput] = useState(title)
+  const [savedValue, setSavedValue] = useState('')
 
   const editTodoHandler = useCallback(
     (editedKey: Partial<Todo>) => {
@@ -17,7 +18,8 @@ const TodoItem: FC<Todo> = memo(({ id, title, done }) => {
   )
 
   useEffect(() => {
-    if (title !== titleInput) editTodoHandler({ title: titleInput })
+    if (titleInput && title !== titleInput)
+      editTodoHandler({ title: titleInput })
   }, [editTodoHandler, title, titleInput])
 
   return (
@@ -32,13 +34,29 @@ const TodoItem: FC<Todo> = memo(({ id, title, done }) => {
         className="todo-item__title"
         type="text"
         value={titleInput}
-        onChange={(e) => setTitleInput(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === 'Escape') {
+            e.stopPropagation()
+            e.currentTarget.blur()
+          }
+        }}
+        onChange={(e) => setTitleInput(e.target.value.trimStart())}
+        onFocus={() => setSavedValue(title)}
+        onBlur={() => {
+          if (!titleInput) {
+            setTitleInput(savedValue)
+          }
+          setTitleInput(titleInput.trim())
+        }}
       />
-      <div className="todo-item__delete-btn">
-        <button type="button" onClick={() => deleteTodo(id)}>
-          {}
-        </button>
-      </div>
+      <button
+        className="todo-item__delete-btn"
+        type="button"
+        onClick={() => deleteTodo(id)}
+      >
+        {}
+        <span className="icon" />
+      </button>
     </li>
   )
 })

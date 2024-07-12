@@ -10,8 +10,7 @@ export const TodosMethodsContext = createContext(
 export const TodosContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const { todos, ...methods } = useTodosState()
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const methodsContext = useMemo(() => methods, [])
+  const methodsContext = useMemo(() => methods, [methods])
 
   return (
     <TodosContext.Provider value={todos}>

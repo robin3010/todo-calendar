@@ -57,49 +57,41 @@
   }
 }
 
-%user-select-btn {
+.header-user-select__btn {
+  @extend %btn;
   background-color: rgba(255, 255, 255, 0.9);
-  &:hover {
+  &:hover:not(:disabled) {
     opacity: 1;
     background-color: rgba(255, 255, 255, 0.93);
   }
-  &:active {
+  &:active:not(:disabled) {
     opacity: 1;
     background-color: #fff;
   }
-  &.disabled {
-    background-color: rgba(255, 255, 255, 0.6);
-    &:hover,
-    &:active {
-      opacity: 0.9;
-      background-color: rgba(255, 255, 255, 0.6);
-    }
+  &:disabled {
+    background-color: #fff;
   }
 }
 
 .header-user-select__btn_save {
-  @extend %user-select-btn;
-  @include btn-icon(
+  @include icon(
     'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDYuNS4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjQgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZmlsbD0iIzRmNGQ0YSIgZD0iTTQzOC42IDEwNS40YzEyLjUgMTIuNSAxMi41IDMyLjggMCA0NS4zbC0yNTYgMjU2Yy0xMi41IDEyLjUtMzIuOCAxMi41LTQ1LjMgMGwtMTI4LTEyOGMtMTIuNS0xMi41LTEyLjUtMzIuOCAwLTQ1LjNzMzIuOC0xMi41IDQ1LjMgMEwxNjAgMzM4LjcgMzkzLjQgMTA1LjRjMTIuNS0xMi41IDMyLjgtMTIuNSA0NS4zIDB6Ii8+PC9zdmc+',
-    rgba(79, 77, 74, 0.8),
-    rgb(79, 77, 74)
+    $hover-color: rgba(79, 77, 74, 0.8)
   );
 }
 
 .header-user-select__btn_edit {
-  @extend %user-select-btn;
-  @include btn-icon(
-    'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDYuNS4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjQgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZmlsbD0iI2ZmZmZmZiIgZD0iTTM2Mi43IDE5LjNMMzE0LjMgNjcuNyA0NDQuMyAxOTcuN2w0OC40LTQ4LjRjMjUtMjUgMjUtNjUuNSAwLTkwLjVMNDUzLjMgMTkuM2MtMjUtMjUtNjUuNS0yNS05MC41IDB6bS03MSA3MUw1OC42IDMyMy41Yy0xMC40IDEwLjQtMTggMjMuMy0yMi4yIDM3LjRMMSA0ODEuMkMtMS41IDQ4OS43IC44IDQ5OC44IDcgNTA1czE1LjMgOC41IDIzLjcgNi4xbDEyMC4zLTM1LjRjMTQuMS00LjIgMjctMTEuOCAzNy40LTIyLjJMNDIxLjcgMjIwLjMgMjkxLjcgOTAuM3oiLz48L3N2Zz4=',
-    rgba(79, 77, 74, 0.8),
-    rgb(79, 77, 74)
+  @include icon(
+    $icon-path:
+      'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDYuNS4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjQgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZmlsbD0iI2ZmZmZmZiIgZD0iTTM2Mi43IDE5LjNMMzE0LjMgNjcuNyA0NDQuMyAxOTcuN2w0OC40LTQ4LjRjMjUtMjUgMjUtNjUuNSAwLTkwLjVMNDUzLjMgMTkuM2MtMjUtMjUtNjUuNS0yNS05MC41IDB6bS03MSA3MUw1OC42IDMyMy41Yy0xMC40IDEwLjQtMTggMjMuMy0yMi4yIDM3LjRMMSA0ODEuMkMtMS41IDQ4OS43IC44IDQ5OC44IDcgNTA1czE1LjMgOC41IDIzLjcgNi4xbDEyMC4zLTM1LjRjMTQuMS00LjIgMjctMTEuOCAzNy40LTIyLjJMNDIxLjcgMjIwLjMgMjkxLjcgOTAuM3oiLz48L3N2Zz4=',
+    $hover-color: rgba(79, 77, 74, 0.8)
   );
 }
 
 .header-user-select__btn_logout {
-  @extend %user-select-btn;
-  @include btn-icon(
+  @include icon(
     'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDYuNS4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjQgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZmlsbD0iI2ZmZmZmZiIgZD0iTTM3Ny45IDEwNS45TDUwMC43IDIyOC43YzcuMiA3LjIgMTEuMyAxNy4xIDExLjMgMjcuM3MtNC4xIDIwLjEtMTEuMyAyNy4zTDM3Ny45IDQwNi4xYy02LjQgNi40LTE1IDkuOS0yNCA5LjljLTE4LjcgMC0zMy45LTE1LjItMzMuOS0zMy45bDAtNjIuMS0xMjggMGMtMTcuNyAwLTMyLTE0LjMtMzItMzJsMC02NGMwLTE3LjcgMTQuMy0zMiAzMi0zMmwxMjggMCAwLTYyLjFjMC0xOC43IDE1LjItMzMuOSAzMy45LTMzLjljOSAwIDE3LjYgMy42IDI0IDkuOXpNMTYwIDk2TDk2IDk2Yy0xNy43IDAtMzIgMTQuMy0zMiAzMmwwIDI1NmMwIDE3LjcgMTQuMyAzMiAzMiAzMmw2NCAwYzE3LjcgMCAzMiAxNC4zIDMyIDMycy0xNC4zIDMyLTMyIDMybC02NCAwYy01MyAwLTk2LTQzLTk2LTk2TDAgMTI4QzAgNzUgNDMgMzIgOTYgMzJsNjQgMGMxNy43IDAgMzIgMTQuMyAzMiAzMnMtMTQuMyAzMi0zMiAzMnoiLz48L3N2Zz4=',
-    rgba(236, 65, 79, 0.8),
-    rgba(236, 65, 79, 0.9)
+    $hover-color: rgba(236, 65, 79, 0.8),
+    $active-color: rgba(236, 65, 79, 0.9)
   );
 }

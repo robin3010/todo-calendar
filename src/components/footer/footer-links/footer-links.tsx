@@ -5,11 +5,11 @@ const FooterLink: FC<(typeof LINKS)[number]> = ({ href, icon }) => (
   <a
     target="_blank"
     href={href}
-    className="footer-link"
+    className={`footer-link footer-link_${icon}`}
     rel="author noreferrer"
   >
-    <div className={`footer-link__link-${icon}`} />
-    <span className="footer-link__link-title">{icon}</span>
+    <span className="icon" />
+    <span className="footer-link__title">{icon}</span>
   </a>
 )
 

@@ -1,8 +1,8 @@
 import { useTodos } from 'contexts/todos/useTodos'
 import { FC } from 'react'
-import TodoItem from '../todoItem/todoItem'
-import TodoForm from '../todoForm/todoForm'
-import './todosList.scss'
+import TodoItem from '../todo-item/todo-item'
+import TodoForm from '../todo-form/todo-form'
+import './todos-list.scss'
 
 const TodosList: FC = () => {
   const todos = useTodos()

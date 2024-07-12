@@ -55,11 +55,15 @@ const HeaderUserSelect: FC = () => {
           inputRef={ref}
         />
       </form>
-      <div className="header-user-select__btn header-user-select__btn_logout">
-        <button type="button" onClick={() => logoutHandler}>
-          {}
-        </button>
-      </div>
+      <button
+        className="header-user-select__btn header-user-select__btn_logout"
+        type="button"
+        onClick={() => logoutHandler}
+        disabled={!user}
+      >
+        {}
+        <span className="icon" />
+      </button>
     </div>
   )
 }

@@ -110,7 +110,6 @@ $scroll: 6px !default;
 
 %checkbox {
   border-radius: 4px;
-  float: left;
   width: 1em;
   height: 1em;
   appearance: none;
@@ -125,19 +124,48 @@ $scroll: 6px !default;
   }
 }
 
-@mixin btn-icon($icon-path, $hover-color, $active-color, $size: 78%) {
+@mixin icon(
+  $icon-path,
+  $bg-color: rgba(79, 77, 74, 0.6),
+  $hover-color: rgba(79, 77, 74, 0.9),
+  $active-color: rgb(79, 77, 74),
+  $size: 100%
+) {
+  .icon {
+    @include transition-style();
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(4px + 2ex + 2px);
+    width: calc(8px + 1ex + 4px);
+    mask-image: url($icon-path);
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: $size $size;
+    background-color: $bg-color;
+  }
+  &:hover .icon {
+    background-color: $hover-color;
+  }
+  &:active .icon {
+    background-color: $active-color;
+  }
+  &:disabled .icon {
+    background-color: $bg-color;
+  }
+}
+
+@mixin btn-icon($icon-path, $hover-color, $active-color, $size: 52%) {
   @extend %btn;
-  height: calc(4px + 2ex);
-  width: calc(8px + 1ex);
-  box-sizing: content-box;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  & button {
-    padding: 0;
+  & > button {
     border: none;
-    width: 100%;
-    height: 100%;
+    padding: 4px 8px;
+    height: calc(4px + 2ex + 2px);
+    width: calc(8px + 1ex + 4px);
     box-sizing: content-box;
     mask-image: url($icon-path);
     mask-position: center;
@@ -145,13 +173,13 @@ $scroll: 6px !default;
     mask-size: $size auto;
     background-color: rgba(79, 77, 74, 0.6);
   }
-  &:hover button {
+  &:hover > button {
     background-color: $hover-color;
   }
-  &:active button {
+  &:active > button {
     background-color: $active-color;
   }
-  & button:disabled {
+  & > button:disabled {
     background-color: rgba(79, 77, 74, 0.6);
   }
 }

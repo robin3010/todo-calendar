@@ -9,7 +9,7 @@ const Footer = () => {
         <span className="footer__copyright-signature">{getCopyrightSig()}</span>
         <span className="footer__copyright-dev-name">by Aleksey Klimov</span>
       </div>
-      <div className="footer__links">
+      <div className="footer-links">
         <FooterLinks />
       </div>
     </footer>

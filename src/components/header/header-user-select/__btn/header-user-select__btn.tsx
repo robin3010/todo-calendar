@@ -23,21 +23,18 @@ const HeaderUserSelectBtn: FC<HeaderUserSelectBtnProps> = ({
   }
 
   return (
-    <div
+    <button
       className={clsx('header-user-select__btn', {
         'header-user-select__btn_edit': isReadonly,
         'header-user-select__btn_save': !isReadonly,
-        disabled: !isReadonly && !userInput,
       })}
+      type={isReadonly ? 'button' : 'submit'}
+      onClick={isReadonly ? changeUserHandler : undefined}
+      disabled={!isReadonly && !userInput}
     >
-      <button
-        type={isReadonly ? 'button' : 'submit'}
-        onClick={isReadonly ? changeUserHandler : undefined}
-        disabled={!userInput}
-      >
-        {}
-      </button>
-    </div>
+      {}
+      <span className="icon" />
+    </button>
   )
 }
 
