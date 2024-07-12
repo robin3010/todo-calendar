@@ -8,3 +8,12 @@ export const dateYYYYMM = (date: Date) => {
 
 export const dateYYYYMMDD = (date: Date) =>
   dateStringFormat(date).replaceAll('-', '').split(' ')[0]
+
+export const dateFull = (date: Date) => {
+  const options: Intl.DateTimeFormatOptions = {
+    day: 'numeric',
+    month: 'long',
+  }
+  const { format } = new Intl.DateTimeFormat(undefined, options)
+  return `${format(date)} ${date.getFullYear()}`
+}

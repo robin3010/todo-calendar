@@ -1,0 +1,93 @@
+@use '/src/styles/styles' as *;
+
+.calendar-nav {
+  @include respond-to(small) {
+    flex-direction: column;
+  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid rgba(79, 77, 74, 0.3);
+}
+
+.calendar-nav-container {
+  @include respond-to(small) {
+    width: 100%;
+  }
+  display: flex;
+}
+
+.selectors-container {
+  @include respond-to(small) {
+    width: 100%;
+  }
+  width: 50%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+%calendar-nav-elem {
+  @include container();
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.calendar-nav-select,
+.calendar-nav-btn-prev,
+.calendar-nav-btn-next,
+.calendar-nav-btn-today {
+  @extend %btn;
+  @extend %calendar-nav-elem;
+  font-size: 1.1em;
+}
+
+@mixin calendar-nav-icon($path) {
+  @extend %calendar-nav-elem;
+  @include icon($path, $size: 70%);
+}
+
+.calendar-nav-select {
+  @include respond-to(small) {
+    width: 100%;
+  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-weight: 500;
+  @include calendar-nav-icon(
+    'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDYuNS4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjQgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZmlsbD0iI2ZmZmZmZiIgZD0iTTIwMS40IDM3NC42YzEyLjUgMTIuNSAzMi44IDEyLjUgNDUuMyAwbDE2MC0xNjBjMTIuNS0xMi41IDEyLjUtMzIuOCAwLTQ1LjNzLTMyLjgtMTIuNS00NS4zIDBMMjI0IDMwNi43IDg2LjYgMTY5LjRjLTEyLjUtMTIuNS0zMi44LTEyLjUtNDUuMyAwcy0xMi41IDMyLjggMCA0NS4zbDE2MCAxNjB6Ii8+PC9zdmc+'
+  );
+}
+
+.calendar-nav-btn-prev {
+  @include respond-to(small) {
+    order: 1;
+  }
+  @include calendar-nav-icon(
+    'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMjAgNTEyIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDYuNS4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjQgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZmlsbD0iI2ZmZmZmZiIgZD0iTTQxLjQgMjMzLjRjLTEyLjUgMTIuNS0xMi41IDMyLjggMCA0NS4zbDE2MCAxNjBjMTIuNSAxMi41IDMyLjggMTIuNSA0NS4zIDBzMTIuNS0zMi44IDAtNDUuM0wxMDkuMyAyNTYgMjQ2LjYgMTE4LjZjMTIuNS0xMi41IDEyLjUtMzIuOCAwLTQ1LjNzLTMyLjgtMTIuNS00NS4zIDBsLTE2MCAxNjB6Ii8+PC9zdmc+'
+  );
+}
+
+.calendar-nav-btn-next {
+  @include respond-to(small) {
+    order: 2;
+  }
+  @include calendar-nav-icon(
+    'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMjAgNTEyIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDYuNS4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjQgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZmlsbD0iI2ZmZmZmZiIgZD0iTTI3OC42IDIzMy40YzEyLjUgMTIuNSAxMi41IDMyLjggMCA0NS4zbC0xNjAgMTYwYy0xMi41IDEyLjUtMzIuOCAxMi41LTQ1LjMgMHMtMTIuNS0zMi44IDAtNDUuM0wyMTAuNyAyNTYgNzMuNCAxMTguNmMtMTIuNS0xMi41LTEyLjUtMzIuOCAwLTQ1LjNzMzIuOC0xMi41IDQ1LjMgMGwxNjAgMTYweiIvPjwvc3ZnPg=='
+  );
+}
+
+.calendar-nav-btn-today {
+  @include transition-style(opacity, 0.3s);
+  @include respond-to(small) {
+    order: 2;
+    flex-grow: 1;
+  }
+  &:disabled {
+    @include respond-to(small) {
+      opacity: 0.7;
+    }
+    opacity: 0;
+  }
+}

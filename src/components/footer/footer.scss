@@ -4,6 +4,10 @@
 
 .footer {
   @include container();
+  @include respond-to(small) {
+    flex-direction: column-reverse;
+    gap: 16px;
+  }
   border-top: 2px solid rgba(79, 77, 74, 0.3);
   border-radius: 0 0 4px 4px;
   background-image: linear-gradient(50deg, rgba(79, 77, 74, 0.65), #4f4d4a);
@@ -16,11 +20,18 @@
 }
 
 .footer__copyright {
+  @include respond-to(small) {
+    flex-direction: column;
+    align-items: center;
+  }
   display: flex;
   gap: 4px;
 }
 
 .footer-links {
+  @include respond-to(small) {
+    flex-direction: row;
+  }
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -62,3 +73,8 @@
 @include footer-link-type('linkedin');
 @include footer-link-type('email');
 
+.footer-link__title {
+  @include respond-to(small) {
+    display: none;
+  }
+}

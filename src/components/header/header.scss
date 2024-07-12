@@ -4,6 +4,8 @@
   @include container();
   @include respond-to(small) {
     border-radius: 0;
+    flex-direction: column;
+    gap: 12px;
   }
   display: flex;
   justify-content: space-between;
@@ -28,16 +30,25 @@
 
 .header-user-select {
   @extend %user-select-input;
+  @include respond-to(small) {
+    justify-content: space-between;
+  }
   width: 100%;
 }
 
 .header-user-select-form {
   @extend %user-select-input;
+  @include respond-to(small) {
+    width: auto;
+  }
   width: 50%;
 }
 
 .header-user-select__input {
   @extend %text-input;
+  @include respond-to(small) {
+    order: 1;
+  }
   box-sizing: content-box;
   text-align: center;
   background-color: rgba(255, 255, 255, 0.8);

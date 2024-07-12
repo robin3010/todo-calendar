@@ -41,6 +41,13 @@ const ModalContainer: FC<ModalContainerProps> = ({
   closeHandler,
   children,
 }) => {
+  useEffect(() => {
+    const $body = document.body
+
+    if (isOpen) return $body.classList.remove('overflow')
+    return $body.classList.add('overflow')
+  }, [isOpen])
+
   if (!isOpen) return null
 
   const closeByClickContainer = (
