@@ -1,0 +1,38 @@
+@use './styles' as *;
+
+:root {
+  @extend %font-style;
+  background-color: #eee;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  @include respond-to(small) {
+    &.overflow {
+      overflow: auto;
+    }
+  }
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+select,
+button,
+input {
+  @extend %font-style;
+}
+
+*:focus,
+:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.main-container {
+  @extend %root-container;
+}

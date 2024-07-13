@@ -1,0 +1,187 @@
+$medium: 768px;
+$large: 992px;
+$scroll: 6px !default;
+
+@function scrollOffset($scrollable) {
+  @if $scrollable == scroll {
+    @return $scroll;
+  } @else if $scrollable == fixed {
+    @return 0;
+  }
+}
+
+@mixin transition-style($prop: all, $delay: 0.3s) {
+  transition: $prop $delay cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+@mixin respond-to($media) {
+  @if $media == small {
+    @media only screen and (max-width: ($medium - 1)) {
+      @content;
+    }
+  } @else if $media == medium {
+    @media only screen and (min-width: $medium) and (max-width: ($large - 1)) {
+      @content;
+    }
+  } @else if $media == large {
+    @media only screen and (min-width: $large) {
+      @content;
+    }
+  }
+}
+
+%font-style {
+  @include respond-to(small) {
+    font-size: 14px;
+  }
+  font-family: Roboto, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: calc(2px + 2ex + 2px);
+  font-weight: 400;
+  color: #4f4d4a;
+}
+
+%btn {
+  @include transition-style();
+  box-sizing: border-box;
+  border: none;
+  border-radius: 4px;
+  background-color: transparent;
+  padding: 4px 8px;
+  opacity: 0.9;
+  &:hover {
+    background-color: rgba(79, 77, 74, 0.1);
+    opacity: 1;
+  }
+  &:active {
+    @include transition-style(all, 0.1s);
+    background-color: rgba(79, 77, 74, 0.3);
+    opacity: 1;
+  }
+  &:disabled {
+    background-color: transparent;
+    opacity: 0.5;
+  }
+}
+
+%root-container {
+  @include respond-to(small) {
+    border-radius: 0;
+  }
+  @include respond-to(medium) {
+    max-width: 720px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    min-height: calc(100vh - 32px);
+  }
+  @include respond-to(large) {
+    max-width: 960px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    min-height: calc(100vh - 48px);
+  }
+  box-sizing: border-box;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+@mixin container($scrollable: fixed) {
+  @include respond-to(large) {
+    padding-left: 24px;
+    padding-right: 24px - scrollOffset($scrollable);
+  }
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+%text-input {
+  @include transition-style(all, 0.2s);
+  box-sizing: border-box;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  background-color: transparent;
+}
+
+%checkbox {
+  border-radius: 4px;
+  width: 1em;
+  height: 1em;
+  appearance: none;
+  background-color: #fff;
+  border: 1px solid rgba(79, 77, 74, 0.5);
+  &:checked {
+    background-color: rgba(79, 77, 74, 0.8);
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDYuNS4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjQgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZmlsbD0iI2ZmZmZmZiIgZD0iTTQzOC42IDEwNS40YzEyLjUgMTIuNSAxMi41IDMyLjggMCA0NS4zbC0yNTYgMjU2Yy0xMi41IDEyLjUtMzIuOCAxMi41LTQ1LjMgMGwtMTI4LTEyOGMtMTIuNS0xMi41LTEyLjUtMzIuOCAwLTQ1LjNzMzIuOC0xMi41IDQ1LjMgMEwxNjAgMzM4LjcgMzkzLjQgMTA1LjRjMTIuNS0xMi41IDMyLjgtMTIuNSA0NS4zIDB6Ii8+PC9zdmc+);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 85% 85%;
+  }
+}
+
+@mixin icon(
+  $icon-path,
+  $bg-color: rgba(79, 77, 74, 0.6),
+  $hover-color: rgba(79, 77, 74, 0.9),
+  $active-color: rgb(79, 77, 74),
+  $size: 100%
+) {
+  .icon {
+    @include transition-style();
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(4px + 2ex + 2px);
+    width: calc(8px + 1ex + 4px);
+    mask-image: url($icon-path);
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: $size $size;
+    background-color: $bg-color;
+  }
+  &:hover .icon {
+    background-color: $hover-color;
+  }
+  &:active .icon {
+    background-color: $active-color;
+  }
+  &:disabled .icon {
+    background-color: $bg-color;
+  }
+}
+
+@mixin btn-icon($icon-path, $hover-color, $active-color, $size: 52%) {
+  @extend %btn;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  & > button {
+    border: none;
+    padding: 4px 8px;
+    height: calc(4px + 2ex + 2px);
+    width: calc(8px + 1ex + 4px);
+    box-sizing: content-box;
+    mask-image: url($icon-path);
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: $size auto;
+    background-color: rgba(79, 77, 74, 0.6);
+  }
+  &:hover > button {
+    background-color: $hover-color;
+  }
+  &:active > button {
+    background-color: $active-color;
+  }
+  & > button:disabled {
+    background-color: rgba(79, 77, 74, 0.6);
+  }
+}

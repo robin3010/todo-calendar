@@ -1,0 +1,11 @@
+@use '/src/styles/styles' as *;
+
+.todos-list {
+  @include container(scroll);
+  list-style: none;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: scroll;
+}
